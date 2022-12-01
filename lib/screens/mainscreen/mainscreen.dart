@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wg_app/screens/configscreen/configscreen.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:wg_app/screens/shoppingscreen/shoppingscreen.dart';
 
 // screen for login (no password is checkt, iput doesnt matter)
 class MainScreen extends StatefulWidget {
@@ -11,12 +12,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int navindex = 1;
+  int navindex = 0;
 
   final screens = [
+    const Center(child: Text('Home')),
+    const ShoppingScreen(),
+    const Center(child: Text('Money')),
     const ConfigScreen(),
-    const Center(child: Text('Shopping')),
-    const Center(child: Text('Money'))
   ];
   final controller = PageController(initialPage: 0);
 
@@ -35,10 +37,12 @@ class _MainScreenState extends State<MainScreen> {
           backgroundColor: const Color.fromARGB(255, 22, 22, 22),
           strokeColor: Colors.orange,
           items: [
-            CustomNavigationBarItem(icon: const Icon(Icons.settings)),
             CustomNavigationBarItem(icon: const Icon(Icons.home_outlined)),
             CustomNavigationBarItem(
-                icon: const Icon(Icons.attach_money_outlined))
+                icon: const Icon(Icons.shopping_basket_outlined)),
+            CustomNavigationBarItem(
+                icon: const Icon(Icons.attach_money_outlined)),
+            CustomNavigationBarItem(icon: const Icon(Icons.settings)),
           ],
           onTap: (i) {
             setState(() {
