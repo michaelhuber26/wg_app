@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wg_app/screens/configscreen/configscreen.dart';
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 
 // screen for login (no password is checkt, iput doesnt matter)
 class MainScreen extends StatefulWidget {
@@ -22,34 +23,31 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBarTheme(
-        data: NavigationBarThemeData(
-            indicatorColor: Colors.blue.shade100,
-            labelTextStyle: MaterialStateProperty.all(
-                const TextStyle(fontSize: 14, fontWeight: FontWeight.w500))),
-        child: NavigationBar(
-            height: 60,
-            selectedIndex: navindex,
-            onDestinationSelected: (index) {
-              setState(() {
-                navindex = index;
-                controller.jumpToPage(navindex);
-              });
-            },
-            destinations: const [
-              NavigationDestination(
-                  icon: Icon(Icons.settings_outlined),
-                  selectedIcon: Icon(Icons.settings),
-                  label: 'Settings'),
-              NavigationDestination(
-                  icon: Icon(Icons.shopping_basket_outlined),
-                  selectedIcon: Icon(Icons.shopping_basket),
-                  label: 'Shopping'),
-              NavigationDestination(
-                  icon: Icon(Icons.money_off),
-                  selectedIcon: Icon(Icons.attach_money_outlined),
-                  label: 'Money'),
-            ]),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: CustomNavigationBar(
+          isFloating: true,
+          elevation: 2,
+          iconSize: 35,
+          borderRadius: const Radius.circular(30),
+          selectedColor: Colors.orange,
+          unSelectedColor: const Color.fromARGB(255, 129, 129, 129),
+          backgroundColor: const Color.fromARGB(255, 22, 22, 22),
+          strokeColor: Colors.orange,
+          items: [
+            CustomNavigationBarItem(icon: const Icon(Icons.settings)),
+            CustomNavigationBarItem(icon: const Icon(Icons.home_outlined)),
+            CustomNavigationBarItem(
+                icon: const Icon(Icons.attach_money_outlined))
+          ],
+          onTap: (i) {
+            setState(() {
+              navindex = i;
+            });
+            controller.jumpToPage(navindex);
+          },
+          currentIndex: navindex,
+        ),
       ),
       body: PageView(
         controller: controller,
