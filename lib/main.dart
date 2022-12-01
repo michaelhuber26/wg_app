@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wg_app/theme/style.dart';
-import 'package:wg_app/screens/startscreen/startscreen.dart';
+import 'package:wg_app/screens/mainscreen/mainscreen.dart';
+import 'package:wg_app/screens/configscreen/configscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       darkTheme: appTheme(),
       initialRoute: '/',
       routes: {
-        '/': (context) => const StartScreen(),
+        '/': (context) => const MainScreen(),
+        '/config': (context) => const ConfigScreen(),
       },
     );
   }
