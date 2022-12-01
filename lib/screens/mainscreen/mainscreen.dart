@@ -17,11 +17,11 @@ class _MainScreenState extends State<MainScreen> {
     const Center(child: Text('Shopping')),
     const Center(child: Text('Money'))
   ];
+  final controller = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[navindex],
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
             indicatorColor: Colors.blue.shade100,
@@ -33,6 +33,7 @@ class _MainScreenState extends State<MainScreen> {
             onDestinationSelected: (index) {
               setState(() {
                 navindex = index;
+                controller.jumpToPage(navindex);
               });
             },
             destinations: const [
@@ -49,6 +50,15 @@ class _MainScreenState extends State<MainScreen> {
                   selectedIcon: Icon(Icons.attach_money_outlined),
                   label: 'Money'),
             ]),
+      ),
+      body: PageView(
+        controller: controller,
+        children: screens,
+        onPageChanged: (index) {
+          setState(() {
+            navindex = index;
+          });
+        },
       ),
     );
   }
